@@ -37,7 +37,7 @@ const logIn = (email,password) =>{
         unsubscribe();
     }
   },[])
-  console.log(user);
+//   console.log(user);
   return (
     <AuthContext.Provider value={authData}>
       {children}
