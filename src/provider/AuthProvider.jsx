@@ -5,6 +5,7 @@ import auth from "../firebase/firebase.init";
 
 const AuthProvider = ({ children }) => {
 const [user,setUser]= useState()
+const [loading,setLoading] = useState(true)
 // create user with email and password
 const registeredUser = (email,password) =>{
     return createUserWithEmailAndPassword(auth , email, password)
@@ -23,11 +24,14 @@ const logIn = (email,password) =>{
     setUser,
     logOutUser,
     logIn,
+    loading,
+    setLoading
   };
   // Obsurber
   useEffect(()=>{
     const unsubscribe = onAuthStateChanged(auth,(currentUser)=>{
         setUser(currentUser)
+        setLoading(false)
     })
     return ()=>{
         unsubscribe();
