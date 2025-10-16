@@ -3,23 +3,32 @@ import { Link } from 'react-router';
 import { AuthContext } from '../../provider/AuthContext';
 
 const Register = () => {
-    const {registeredUser,setUser} = use(AuthContext)
-    const handleRegister=(e)=>{
+    const { registeredUser, setUser, updatedUser } = use(AuthContext)
+    const handleRegister = (e) => {
         e.preventDefault()
-        // const name = e.target.name.value;
-        // const photoURL = e.target.photoURL.value;
+        const name = e.target.name.value;
+        const photoURL = e.target.photoURL.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
-        // const userInfo = {name,photoURL,email,password}
-        
-        registeredUser(email,password)
-        .then(result=>{
-            const user=result.user
-            setUser(user)
-        })
-        .catch(error=>{
-            console.log(error);
-        })
+        const userInfo = {
+            displayName: name,
+            photoURL: photoURL
+        }
+
+        registeredUser(email, password)
+            .then(result => {
+                const user = result.user
+                updatedUser(userInfo)
+                    .then(() => {
+                        setUser({ ...user, userInfo })
+                    }).catch((error) => {
+                        console.log(error);
+                    });
+
+            })
+            .catch(error => {
+                console.log(error);
+            })
 
     }
     return (
