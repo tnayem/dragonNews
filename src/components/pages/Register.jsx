@@ -6,8 +6,8 @@ const Register = () => {
     const {registeredUser,setUser} = use(AuthContext)
     const handleRegister=(e)=>{
         e.preventDefault()
-        const name = e.target.name.value;
-        const photoURL = e.target.photoURL.value;
+        // const name = e.target.name.value;
+        // const photoURL = e.target.photoURL.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
         // const userInfo = {name,photoURL,email,password}
